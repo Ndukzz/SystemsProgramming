@@ -73,30 +73,35 @@ const FileInputComponent = () => {
   }, [loader, searchList]);
 
   return (
-    <div className={classes.inputs}>
-      <div className={classes.input}>
-        <label htmlFor="Program">Drop Program File</label>
-        <br />
-        <input type="file" onChange={handleProgramFileSelect} />
-        {programFileContent && (
-          <div>
-            <h4>Program File Content:</h4>
-            <pre>{programFileContent}</pre>
-          </div>
-        )}
+    <>
+      <div className={classes.inputs}>
+        <div className={classes.input}>
+          <label htmlFor="Program">Drop Program File</label>
+          <br />
+          <input type="file" onChange={handleProgramFileSelect} />
+          {programFileContent && (
+            <div>
+              <h4>Program File Content:</h4>
+              <p>The complete Table can be viewed in the console</p>
+            </div>
+          )}
+        </div>
+        <div className={classes.input}>
+          <label htmlFor="Program">Drop Search File</label>
+          <br />
+          <input type="file" onChange={handleSearchFileSelect} />
+          {searchFileContent && (
+            <div>
+              <h4>Search File Content:</h4>
+              <pre>{searchFileContent}</pre>
+            </div>
+          )}
+        </div>
       </div>
-      <div className={classes.input}>
-        <label htmlFor="Program">Drop Search File</label>
-        <br />
-        <input type="file" onChange={handleSearchFileSelect} />
-        {searchFileContent && (
-          <div>
-            <h4>Search File Content:</h4>
-            <pre>{searchFileContent}</pre>
-          </div>
-        )}
-      </div>
-    </div>
+      {programFileContent && searchFileContent && (
+        <h3>The results can be viewed in the console</h3>
+      )}
+    </>
   );
 };
 
