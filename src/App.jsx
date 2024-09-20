@@ -90,8 +90,8 @@ const App = () => {
         <li>Drop files to view results</li>
       </ol>
     <FileInputComponent />
-{/*     <ConsoleLogDisplay />
-    </> */}
+{/*     <ConsoleLogDisplay /> */}
+    </>
   )
 }
 
