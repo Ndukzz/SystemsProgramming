@@ -85,7 +85,10 @@ const App = () => {
   return (
     <>
     <h1>Systems Programming</h1>
-    <p>Open up the console to view results</p>
+      <ol>
+        <li>Open up the console</li>
+        <li>Drop files to view results</li>
+      </ol>
     <FileInputComponent />
     <ConsoleLogDisplay />
     </>
