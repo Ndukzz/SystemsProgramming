@@ -82,7 +82,7 @@ const FileInputComponent = () => {
           {programFileContent && (
             <div>
               <h4>Program File Content:</h4>
-              <p>The complete Table can be viewed in the console</p>
+              <p>The COMPLETE Table can be viewed in the console</p>
             </div>
           )}
         </div>
