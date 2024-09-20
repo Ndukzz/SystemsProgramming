@@ -1,5 +1,12 @@
 .inputs{ 
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.input {
+  border: 2px solid teal;
+  width: 40%;
+  margin-bottom: 20px;
+  padding: 10px
 }
