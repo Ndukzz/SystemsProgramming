@@ -86,7 +86,7 @@ class BinarySearchTree {
     }
     // Ensure the symbol only contains valid characters
     if (/[^a-zA-Z0-9_]/.test(symbol)) {
-      console.error(`Symbols can only contain letters, digits, and underscores: ${symbol}`);
+      console.log(`Symbols can only contain letters, digits, and underscores: ${symbol}`);
     }
     let resultNode = this._searchRecursive(this.root, symbol)
     if (resultNode) {
@@ -172,7 +172,7 @@ class BinarySearchTree {
   modifyNode(symbol, newAttributes) {
     const node = this.search(symbol); // Search for the node by symbol
     if (!node) {
-      console.error(`Node with symbol ${symbol} not found.`);
+      console.log(`Node with symbol ${symbol} not found.`);
       return false;
     }
 
