@@ -7,6 +7,7 @@ const FileInputComponent = () => {
   const [searchFileContent, setSearchFileContent] = useState(null);
   const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [loader, setLoader] = useState(null);
+  const [table, setTable] = useState(null)
   const [searchList, setSearchList] = useState([]);
 
   const handleProgramFileSelect = (event) => {
@@ -53,8 +54,9 @@ const FileInputComponent = () => {
   useEffect(() => {
     if (programFileContent) {
       const loader = new Loader(programFileContent);
-      loader.parseProgram();
-      setLoader(loader);
+      setLoader(loader);      
+      let data = (loader.parseProgram());
+      setTable(data)
     }
   }, [programFileContent]);
 
@@ -70,7 +72,13 @@ const FileInputComponent = () => {
       const searchResult = loader.parseSearch(searchList);
       // console.log(searchResult);
     }
-  }, [loader, searchList]);
+  }, [loader, searchList])
+
+  const displayTable = (table && {
+    "Name": table.map((row) => row.name),
+    "Type": table.map((row) => row.type),
+    "Address": table.map((row) => row.address),
+  })
 
   return (
     <>
@@ -95,12 +103,15 @@ const FileInputComponent = () => {
               <h4>Search File Content:</h4>
               <pre>{searchFileContent}</pre>
             </div>
+            
           )}
         </div>
       </div>
       {programFileContent && searchFileContent && (
         <h3>The results can be viewed in the console</h3>
       )}
+      {/* Create a table and display the contents here in the component */}
+      {/* {displayTable && (displayTable)} */}
     </>
   );
 };

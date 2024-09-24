@@ -79,7 +79,7 @@ class BinarySearchTree {
    * @param {string} symbol - The symbol to search for
    * @returns {Node|null} The node containing the symbol, or null if not found
    */
-  search(symbol) {
+  search(symbol, newValue = null, newRFlag = null, newIFlag = null, newMFlag = null) {
     // Ensure the symbol does not exceed the maximum length of 10 characters
     if (symbol.length > 10) {
       console.error(`Symbols cannot exceed 10 characters: ${symbol}`);
@@ -88,8 +88,20 @@ class BinarySearchTree {
     if (/[^a-zA-Z0-9_]/.test(symbol)) {
       console.error(`Symbols can only contain letters, digits, and underscores: ${symbol}`);
     }
-    // Start the recursive search from the root of the tree
-    return this._searchRecursive(this.root, symbol);
+    let resultNode = this._searchRecursive(this.root, symbol)
+    if (resultNode) {
+      // If the node is found and modification values are provided, modify the node
+      newMFlag = true;
+      if (newValue || newRFlag !== null || newIFlag !== null || newMFlag !== null) {
+        this.modifyNode(resultNode, newValue, newRFlag, newIFlag, newMFlag);
+      }
+  
+      console.log(`Symbol found: ${resultNode.symbol}`);
+      return resultNode;
+    } else {
+      console.log(`Symbol ${symbol} not found in the Table`);
+      return null;
+    }
   }
 
   /**
@@ -101,7 +113,7 @@ class BinarySearchTree {
   _searchRecursive(node, symbol) {
     if (!node) {
       // If the current node is null, the symbol is not in the tree
-      console.error(`Symbol ${symbol} not found in the table`);
+      // console.error(`Symbol ${symbol} not found in the table`);
       return null;
     }
     if (symbol === node.symbol) {
@@ -149,6 +161,29 @@ class BinarySearchTree {
       // Recursively traverse the right subtree
       this._inorderTraversal(node.right, result);
     }
+  }
+
+  /**
+   * Modify a node's attributes after searching for it by symbol
+   * @param {string} symbol - The symbol of the node to modify
+   * @param {Object} newAttributes - Object containing the new attribute values
+   *      newAttributes: { value, rflag, iflag, mflag }
+   */
+  modifyNode(symbol, newAttributes) {
+    const node = this.search(symbol); // Search for the node by symbol
+    if (!node) {
+      console.error(`Node with symbol ${symbol} not found.`);
+      return false;
+    }
+
+    // Update the node's attributes if new values are provided
+    if (newAttributes.value !== undefined) node.value = newAttributes.value;
+    if (newAttributes.rflag !== undefined) node.rflag = newAttributes.rflag;
+    if (newAttributes.iflag !== undefined) node.iflag = newAttributes.iflag;
+    if (newAttributes.mflag !== undefined) node.mflag = newAttributes.mflag;
+
+    console.log(`Node with symbol ${symbol} has been updated.`);
+    return true;
   }
 }
 
