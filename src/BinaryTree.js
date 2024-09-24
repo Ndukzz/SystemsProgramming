@@ -8,12 +8,12 @@ class Node {
    */
   constructor(symbol, value, rflag) {
     this.symbol = symbol; // The symbol to be stored in the node
-    this.value = value;   // The value associated with the symbol
-    this.rflag = rflag;   // The RFLAG attribute of the symbol
-    this.iflag = true;    // The IFLAG attribute of the symbol (initialized to true)
-    this.mflag = false;   // The MFLAG attribute of the symbol (initialized to false)
-    this.left = null;     // The left child of the node
-    this.right = null;    // The right child of the node
+    this.value = value; // The value associated with the symbol
+    this.rflag = rflag; // The RFLAG attribute of the symbol
+    this.iflag = true; // The IFLAG attribute of the symbol (initialized to true)
+    this.mflag = false; // The MFLAG attribute of the symbol (initialized to false)
+    this.left = null; // The left child of the node
+    this.right = null; // The right child of the node
   }
 }
 
@@ -79,23 +79,36 @@ class BinarySearchTree {
    * @param {string} symbol - The symbol to search for
    * @returns {Node|null} The node containing the symbol, or null if not found
    */
-  search(symbol, newValue = null, newRFlag = null, newIFlag = null, newMFlag = null) {
+  search(
+    symbol,
+    newValue = null,
+    newRFlag = null,
+    newIFlag = null,
+    newMFlag = null
+  ) {
     // Ensure the symbol does not exceed the maximum length of 10 characters
     if (symbol.length > 10) {
-      console.error(`Symbols cannot exceed 10 characters: ${symbol}`);
+      console.log(`Symbols cannot exceed 10 characters: ${symbol}`);
     }
     // Ensure the symbol only contains valid characters
     if (/[^a-zA-Z0-9_]/.test(symbol)) {
-      console.log(`Symbols can only contain letters, digits, and underscores: ${symbol}`);
+      console.log(
+        `Symbols can only contain letters, digits, and underscores: ${symbol}`
+      );
     }
-    let resultNode = this._searchRecursive(this.root, symbol)
+    let resultNode = this._searchRecursive(this.root, symbol);
     if (resultNode) {
-      // If the node is found and modification values are provided, modify the node
       newMFlag = true;
-      if (newValue || newRFlag !== null || newIFlag !== null || newMFlag !== null) {
-        this.modifyNode(resultNode, newValue, newRFlag, newIFlag, newMFlag);
+      // If the node is found and modification values are provided, modify the node
+      if (
+        newValue ||
+        newRFlag !== null ||
+        newIFlag !== null ||
+        newMFlag !== null
+      ) {
+        resultNode.mflag = true;
       }
-  
+
       console.log(`Symbol found: ${resultNode.symbol}`);
       return resultNode;
     } else {

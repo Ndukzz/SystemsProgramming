@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import Loader from "./NdukweE1";
 import classes from "./LoadFile.module.css";
+import TableComponent from "./TableComponent";
 
 const FileInputComponent = () => {
   const [programFileContent, setProgramFileContent] = useState(null);
   const [searchFileContent, setSearchFileContent] = useState(null);
   const [isTableLoaded, setIsTableLoaded] = useState(false);
   const [loader, setLoader] = useState(null);
-  const [table, setTable] = useState(null)
+  const [tableData, setTableData] = useState(null)
   const [searchList, setSearchList] = useState([]);
 
   const handleProgramFileSelect = (event) => {
@@ -56,7 +57,9 @@ const FileInputComponent = () => {
       const loader = new Loader(programFileContent);
       setLoader(loader);      
       let data = (loader.parseProgram());
-      setTable(data)
+      setTableData(data)
+      {tableData && console.log(tableData)};
+      
     }
   }, [programFileContent]);
 
@@ -74,12 +77,6 @@ const FileInputComponent = () => {
     }
   }, [loader, searchList])
 
-  const displayTable = (table && {
-    "Name": table.map((row) => row.name),
-    "Type": table.map((row) => row.type),
-    "Address": table.map((row) => row.address),
-  })
-
   return (
     <>
       <div className={classes.inputs}>
@@ -90,7 +87,7 @@ const FileInputComponent = () => {
           {programFileContent && (
             <div>
               <h4>Program File Content:</h4>
-              <p>The COMPLETE Table can be viewed in the console</p>
+              <p>The <span style={{color: "red"}}>ERROR</span> logs can be viewed in the console</p>
             </div>
           )}
         </div>
@@ -108,10 +105,10 @@ const FileInputComponent = () => {
         </div>
       </div>
       {programFileContent && searchFileContent && (
-        <h3>The results can be viewed in the console</h3>
+        <h3>The error logs can be viewed in the console</h3>
       )}
-      {/* Create a table and display the contents here in the component */}
-      {/* {displayTable && (displayTable)} */}
+      {/* Create a table and display the contents here in the  */}
+      {tableData && <TableComponent data={tableData} />}
     </>
   );
 };

@@ -24,7 +24,7 @@ class NdukweE1 {
 
   // Parses the entire program by reading symbols, values, and flags from fileContent
   parseProgram() {
-    console.log("File Length:", this.fileLength);
+    // console.log("File Length:", this.fileLength);
 
     while (this.currPos < this.fileLength) {
       // Loop through file content until the end of file (EOF)
